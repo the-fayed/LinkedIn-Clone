@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, UpdateResult } from 'typeorm';
+import { Injectable } from '@nestjs/common';
 import { from, Observable } from 'rxjs';
-import { Repository } from 'typeorm';
 
 import { FeedPostEntity } from './models/post.entity';
 import { IFeedPost } from './models/post.interface';
@@ -23,6 +23,10 @@ export class FeedService {
 
   findById(id: number): Observable<IFeedPost> {
     return from(this.feedRepository.findOneBy({ id }));
+  }
+
+  update(id: number, feedPost: Partial<IFeedPost>): Observable<UpdateResult> {
+    return from(this.feedRepository.update(id, feedPost));
   }
 
   delete(id: number): void {

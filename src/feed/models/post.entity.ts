@@ -1,13 +1,16 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
 
 @Entity('feed_post')
 export class FeedPostEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ default: '' })
+    @Column({ nullable: false })
     body: string;
 
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    @Column({ nullable: true })
+    image: string;
+
+    @CreateDateColumn()
     createdAt: Date;
 }
